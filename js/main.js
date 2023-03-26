@@ -23,14 +23,15 @@ const openModal = () => {
 	modalCart.classList.add('show');
 }
 
-
-// создаем функцию для - Закрытия модального окна по нажатию на X и 
-// любое место кроме самого модального окна
+/* создаем функцию для - Закрытия модального окна по нажатию на X и 
+   на любое место кроме самого модального окна */
 
 const closeModal = (event) => {
 	const target = event.target;
-	if (target.classList.contains('overlay') || target.classList.contains('modal-close')) {
-		modalCart.classList.remove('show');
+	if (target.classList.contains('overlay') || 
+		target.classList.contains('modal-close')) {
+		
+			modalCart.classList.remove('show');
 	} 
 }
 
@@ -41,13 +42,16 @@ modalCart.addEventListener('click', closeModal)
 
 // scroll smooth
 
+// DOM элемент
+ 
 const scrollLinks = document.querySelectorAll('a.scroll-link')
 
 for (let item of scrollLinks) {
 	item.addEventListener('click', (event) => {
 		event.preventDefault()
-		const ID = item.getAttribute('href');
 
+		const ID = item.getAttribute('href');
+		
 		document.querySelector(ID).scrollIntoView ({
 			behavior: 'smooth',
 			block: 'start',
