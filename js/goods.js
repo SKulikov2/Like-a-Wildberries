@@ -22,17 +22,18 @@ const createCard = function (objectCard) {
     const card = document.createElement('div');
 
     card.className = 'col-lg-3 col-sm-6';
+    const {label, img, name, description, id, price } = objectCard;
 
     card.innerHTML = `
         <div class="goods-card">
         ${objectCard.label ? 
-            `<span class="label">${objectCard.label}</span>`:
+            `<span class="label">${label}</span>`:
              ''}
-            <img src='db/${objectCard.img}' alt='${objectCard.name}' class="goods-image">
-            <h3 class="goods-title">${objectCard.name}</h3>
-            <p class="goods-description">${objectCard.description}</p>
-            <button class="button goods-card-btn add-to-cart" data-id='${objectCard.id}'>
-                <span class="button-price">$${objectCard.price}</span>
+            <img src='db/${img}' alt='${name}' class="goods-image">
+            <h3 class="goods-title">${name}</h3>
+            <p class="goods-description">${description}</p>
+            <button class="button goods-card-btn add-to-cart" data-id='${id}'>
+                <span class="button-price">$${price}</span>
             </button>
         </div>
     `;
@@ -76,6 +77,16 @@ for (let link of navigationLinks) {
         event.preventDefault();
         const field = link.dataset.field;
         const value = link.textContent;
-        filterCards(field, value)
+        filterCards(field, value);
+
+// Нажимая на All снова выводим все товары
+        if(!link.dataset.field) {
+            getGoods().then(renderCards);
+        }
     })
 }
+
+// lastNavigationLink.addEventListener('click', (event)=> {
+//     event.preventDefault();
+    
+// })
